@@ -2,9 +2,9 @@
 
 ## Overview
 
-This repository contains a custom theme for FusionPBX, an open-source VoIP (Voice over IP) PBX system. FusionPBX is a web-based multi-tenant PBX system that provides a complete telephony solution with features like call routing, voicemail, conferencing, and call detail records (CDR).
+This repository contains a modernized FusionPBX theme featuring Apple Human Interface Design principles, micro-animations, glass morphism effects, and a responsive widget-based layout. FusionPBX is a web-based multi-tenant PBX system that provides a complete telephony solution with features like call routing, voicemail, conferencing, and call detail records (CDR).
 
-This theme provides a modern, customizable user interface for the FusionPBX web administration panel and user portal.
+This theme transforms the traditional FusionPBX interface into a modern, Apple-inspired design with smooth animations and contemporary UI patterns.
 
 ## What is FusionPBX?
 
@@ -23,41 +23,54 @@ FusionPBX is a full-featured PBX system built on FreeSWITCH that includes:
 
 ```
 fusion-custom-v2/
-├── app_config.php          # Theme configuration and settings
-├── app_defaults.php        # Default theme settings and background images
-├── app_languages.php       # Multi-language support definitions
-├── config.php              # UI element definitions (buttons, icons)
-├── css.php                 # Dynamic CSS generation with theme variables
-├── template.php            # Main Smarty template file
-├── favicon.ico             # Theme favicon
-└── images/                 # Theme assets
-    ├── backgrounds/        # Background images for the theme
-    ├── logo*.png          # Various logo files for different contexts
-    ├── icon_cdr_*.png     # Call Detail Record status icons
-    └── *.png, *.gif       # Other UI elements and backgrounds
+├── css.php                 # Modern CSS framework with Apple HIG design system
+├── template.php            # Updated Smarty template with modern grid layout
+├── demo.html              # Standalone demo showcasing modern features
+├── MODERN_DESIGN.md       # Comprehensive design system documentation
+├── app_config.php         # Theme configuration and settings
+├── app_defaults.php       # Default theme settings and background images
+├── app_languages.php      # Multi-language support definitions
+├── config.php             # UI element definitions (buttons, icons)
+├── favicon.ico            # Theme favicon
+└── images/                # Theme assets
+    ├── backgrounds/       # Background images for the theme
+    ├── logo*.png         # Various logo files for different contexts
+    ├── icon_cdr_*.png    # Call Detail Record status icons
+    └── *.png, *.gif      # Other UI elements and backgrounds
 ```
 
 ## Key Features
 
-- **Responsive Design**: Modern, mobile-friendly interface
-- **Customizable Colors**: Extensive color customization options
-- **Multiple Background Options**: Various background images and colors
-- **CDR Icons**: Visual indicators for different call statuses (answered, missed, failed, etc.)
-- **Multi-language Support**: Internationalization support
-- **Bootstrap Integration**: Uses Bootstrap framework for consistent styling
-- **FontAwesome Icons**: Modern icon set integration
+### Modern Design System
+- **Apple Human Interface Design**: Clean typography, consistent spacing, rounded corners
+- **Glass Morphism**: Translucent backgrounds with backdrop blur effects
+- **CSS Grid Layout**: Modern 3-column layout (sidebar, main content, widgets)
+- **Dark Mode**: Full dark/light mode support with CSS custom properties
+- **Micro-animations**: 200ms fade-ins, 100ms button press effects, staggered animations
 
-## Installation
+### Interactive Elements
+- **Widget Dashboard**: Modular widgets for system status, stats, and quick actions
+- **Responsive Navigation**: Smooth sidebar with hover effects and active states
+- **Modern Buttons**: Ripple effects and scaling animations
+- **Status Indicators**: Color-coded system status with glow effects
 
-### Prerequisites
+### Technical Features
+- **Responsive Design**: Mobile-first approach with breakpoints at 768px and 1200px
+- **Performance Optimized**: Hardware-accelerated animations and efficient CSS
+- **Accessibility**: Reduced motion support and proper focus indicators
+- **Browser Compatibility**: Modern browsers with graceful degradation
 
+## How to Run
+
+### Option 1: FusionPBX Integration
+
+#### Prerequisites
 1. **FusionPBX Installation**: This theme requires a working FusionPBX installation
 2. **Web Server**: Apache or Nginx with PHP support
 3. **PHP**: Version 7.4 or higher
 4. **Database**: PostgreSQL (recommended) or MySQL
 
-### Installing the Theme
-
+#### Installing the Theme
 1. **Locate FusionPBX Themes Directory**:
    ```bash
    # Typically located at:
@@ -86,11 +99,33 @@ fusion-custom-v2/
    - Set **template** to `custom-v2`
    - Save the changes
 
-4. **Clear Cache** (if applicable):
+### Option 2: Standalone Demo
+
+1. **Clone the repository**:
    ```bash
-   # Clear any cached files
-   rm -rf /var/cache/fusionpbx/*
+   git clone https://github.com/mikan-senpai/fusion-custom-v2.git
+   cd fusion-custom-v2
    ```
+
+2. **Start a local web server**:
+   ```bash
+   python3 -m http.server 8000
+   ```
+
+3. **Open your browser and navigate to**:
+   ```
+   http://localhost:8000/demo.html
+   ```
+
+### Option 3: Live Demo
+Visit the hosted demo at: `https://work-1-eilxtnhsffrgwbcw.prod-runtime.all-hands.dev/demo.html`
+
+## Interactive Features
+- **Dark Mode Toggle**: Click the toggle in the header to switch between light and dark themes
+- **Navigation**: Click sidebar items to see smooth active state transitions
+- **Buttons**: Hover and click buttons to experience micro-animations and ripple effects
+- **Responsive Design**: Resize browser window to see mobile layout adaptations
+- **Widget Interactions**: Observe staggered animations and loading states
 
 ## Configuration
 
@@ -117,41 +152,86 @@ The theme can be customized through the FusionPBX web interface:
 
 ## Development
 
+### Modern Architecture
+
+The theme uses a modern CSS architecture with:
+- **CSS Custom Properties**: Dynamic theming with CSS variables
+- **CSS Grid Layout**: Modern 3-column responsive layout
+- **Hardware-accelerated Animations**: Transform and opacity-based animations
+- **Glass Morphism**: Backdrop-filter effects for modern UI
+
 ### File Structure Explanation
 
-- **template.php**: Main Smarty template that defines the HTML structure
-- **css.php**: Dynamic CSS file that reads theme settings and generates styles
+- **css.php**: Contains 4000+ lines of modern CSS framework with Apple HIG design system
+- **template.php**: Updated Smarty template with modern grid layout and JavaScript interactions
+- **demo.html**: Standalone HTML demo showcasing all modern features
+- **MODERN_DESIGN.md**: Comprehensive design system documentation
 - **app_config.php**: Defines theme metadata and default settings
 - **config.php**: Contains UI element definitions and button styles
 
 ### Customization
 
-To customize the theme:
+#### Color Customization
+Modify CSS custom properties in `css.php`:
+```css
+:root {
+    --primary-blue: #007AFF;        /* Apple's signature blue */
+    --background-primary: #F2F2F7;  /* iOS background */
+    --spacing-md: 16px;             /* 8-point grid system */
+    --duration-normal: 200ms;       /* Animation timing */
+}
+```
 
-1. **Modify CSS**: Edit `css.php` to change styles
-2. **Update Template**: Modify `template.php` for structural changes
-3. **Add Images**: Place custom images in the `images/` directory
-4. **Configure Settings**: Update `app_config.php` for new theme options
+#### Layout Adjustments
+Modify grid template in `css.php`:
+```css
+.modern-layout {
+    grid-template-columns: 280px 1fr 320px; /* sidebar, main, widgets */
+    grid-template-rows: 80px 1fr;           /* header, content */
+}
+```
+
+#### Animation Timing
+Adjust animation durations:
+```css
+:root {
+    --duration-fast: 100ms;    /* Button press */
+    --duration-normal: 200ms;  /* Fade transitions */
+    --duration-slow: 300ms;    /* Complex animations */
+}
+```
 
 ### Development Environment
 
-For development, you can:
-
-1. Set up a local FusionPBX development environment
-2. Create a symbolic link to your development directory:
+1. **Local Development**:
    ```bash
+   # Clone and serve locally
+   git clone https://github.com/mikan-senpai/fusion-custom-v2.git
+   cd fusion-custom-v2
+   python3 -m http.server 8000
+   ```
+
+2. **FusionPBX Integration**:
+   ```bash
+   # Create symbolic link for development
    ln -s /path/to/your/dev/fusion-custom-v2 /var/www/fusionpbx/themes/dev-theme
    ```
-3. Activate the development theme in FusionPBX settings
+
+3. **Live Reload**: Use browser dev tools to test responsive breakpoints and animations
 
 ## Browser Compatibility
 
-This theme supports:
-- Chrome/Chromium (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Internet Explorer 11+ (limited support)
+### Modern Features Support
+- **CSS Grid Layout**: Chrome 57+, Firefox 52+, Safari 10.1+, Edge 16+
+- **CSS Custom Properties**: Chrome 49+, Firefox 31+, Safari 9.1+, Edge 15+
+- **Backdrop Filter**: Chrome 76+, Firefox 103+, Safari 9+, Edge 79+
+- **CSS Animations**: All modern browsers
+
+### Graceful Degradation
+- Grid layout falls back to flexbox on older browsers
+- Backdrop filter gracefully degrades without blur effect
+- Animations respect `prefers-reduced-motion` user preference
+- Progressive enhancement ensures basic functionality on all browsers
 
 ## License
 
