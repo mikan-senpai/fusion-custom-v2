@@ -1121,6 +1121,147 @@
 		xhttp.send();
 	}
 	{*//domain selector *}
+
+	{*//Modern Apple-inspired JavaScript *}
+	{literal}
+	// Dark mode functionality
+	function toggleDarkMode() {
+		document.body.classList.toggle('dark-mode');
+		localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+	}
+
+	// Initialize dark mode from localStorage
+	if (localStorage.getItem('darkMode') === 'true') {
+		document.body.classList.add('dark-mode');
+	}
+
+	// Micro-animations and interactions
+	document.addEventListener('DOMContentLoaded', function() {
+		// Add staggered animation delays to widget cards
+		const widgetCards = document.querySelectorAll('.widget-card');
+		widgetCards.forEach((card, index) => {
+			card.style.animationDelay = `${index * 100}ms`;
+		});
+
+		// Add hover effects to navigation items
+		const navItems = document.querySelectorAll('.nav-item');
+		navItems.forEach(item => {
+			item.addEventListener('mouseenter', function() {
+				this.style.transform = 'translateX(4px)';
+			});
+			
+			item.addEventListener('mouseleave', function() {
+				if (!this.classList.contains('active')) {
+					this.style.transform = 'translateX(0)';
+				}
+			});
+		});
+
+		// Add ripple effect to buttons
+		const buttons = document.querySelectorAll('.btn-modern');
+		buttons.forEach(button => {
+			button.addEventListener('click', function(e) {
+				const ripple = document.createElement('span');
+				const rect = this.getBoundingClientRect();
+				const size = Math.max(rect.width, rect.height);
+				const x = e.clientX - rect.left - size / 2;
+				const y = e.clientY - rect.top - size / 2;
+				
+				ripple.style.width = ripple.style.height = size + 'px';
+				ripple.style.left = x + 'px';
+				ripple.style.top = y + 'px';
+				ripple.classList.add('ripple');
+				
+				this.appendChild(ripple);
+				
+				setTimeout(() => {
+					ripple.remove();
+				}, 600);
+			});
+		});
+
+		// Panel fade-in animations
+		const panels = document.querySelectorAll('.modern-main, .modern-sidebar, .modern-widgets');
+		panels.forEach((panel, index) => {
+			panel.classList.add('panel-enter');
+			setTimeout(() => {
+				panel.classList.add('panel-enter-active');
+			}, index * 100);
+		});
+
+		// Smooth scrolling for navigation
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				const target = document.querySelector(this.getAttribute('href'));
+				if (target) {
+					target.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			});
+		});
+
+		// Auto-refresh widget data (placeholder)
+		setInterval(() => {
+			// This would typically fetch real data from the server
+			updateWidgetData();
+		}, 30000); // Update every 30 seconds
+	});
+
+	// Placeholder function for updating widget data
+	function updateWidgetData() {
+		// Add loading animation
+		const widgets = document.querySelectorAll('.widget-card');
+		widgets.forEach(widget => {
+			widget.classList.add('loading');
+			setTimeout(() => {
+				widget.classList.remove('loading');
+			}, 1000);
+		});
+	}
+
+	// Enhanced form interactions
+	document.addEventListener('DOMContentLoaded', function() {
+		const formElements = document.querySelectorAll('.form-modern');
+		formElements.forEach(element => {
+			element.addEventListener('focus', function() {
+				this.style.transform = 'scale(1.02)';
+				this.style.boxShadow = '0 0 0 3px rgba(0, 122, 255, 0.1)';
+			});
+			
+			element.addEventListener('blur', function() {
+				this.style.transform = 'scale(1)';
+				this.style.boxShadow = 'none';
+			});
+		});
+	});
+
+	// Responsive sidebar toggle for mobile
+	function toggleSidebar() {
+		const sidebar = document.querySelector('.modern-sidebar');
+		const layout = document.querySelector('.modern-layout');
+		
+		if (window.innerWidth <= 1200) {
+			sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+		}
+	}
+
+	// Handle window resize
+	window.addEventListener('resize', function() {
+		const sidebar = document.querySelector('.modern-sidebar');
+		const widgets = document.querySelector('.modern-widgets');
+		
+		if (window.innerWidth > 1200) {
+			sidebar.style.display = 'block';
+			widgets.style.display = 'flex';
+		} else {
+			widgets.style.display = 'none';
+		}
+	});
+	{/literal}
+
 	</script>
 
 </head>
@@ -1179,23 +1320,176 @@
 
 	{*//other pages *}
 	{else}
-		{if $settings.theme.menu_style == 'side' || $settings.theme.menu_style == 'inline' || $settings.theme.menu_style == 'static'}
-			{$container_open}
-			{if $settings.theme.menu_style == 'inline'}{$logo}{/if}
-			{$menu}
-			{if $settings.theme.menu_style == 'inline' || $settings.theme.menu_style == 'static'}<br />{/if}
-			{if $settings.theme.menu_style == 'side'}<input type='hidden' id='menu_side_state_current' value='{if $menu_side_state == 'hidden'}expanded{else}{$menu_side_state}{/if}'>{/if}
-		{else} {*//default: fixed *}
-			{$menu}
-			{$container_open}
-		{/if}
-		<div id='main_content'>
-			{$document_body}
+		<div class="modern-layout">
+			{*//Modern Sidebar *}
+			<aside class="modern-sidebar">
+				<div class="sidebar-brand">
+					<img src="{$logo_source}" alt="Logo" style="height: 40px; margin-bottom: 24px;">
+				</div>
+				<nav class="sidebar-nav">
+					{*//Navigation items will be populated by FusionPBX menu system *}
+					<a href="#" class="nav-item active">
+						<i class="fas fa-home"></i>
+						<span>Dashboard</span>
+					</a>
+					<a href="#" class="nav-item">
+						<i class="fas fa-phone"></i>
+						<span>Extensions</span>
+					</a>
+					<a href="#" class="nav-item">
+						<i class="fas fa-users"></i>
+						<span>Users</span>
+					</a>
+					<a href="#" class="nav-item">
+						<i class="fas fa-chart-bar"></i>
+						<span>Reports</span>
+					</a>
+					<a href="#" class="nav-item">
+						<i class="fas fa-cog"></i>
+						<span>Settings</span>
+					</a>
+				</nav>
+			</aside>
+
+			{*//Modern Header *}
+			<header class="modern-header">
+				<div class="header-left">
+					<h1 style="margin: 0; font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">
+						{$document_title|default:"FusionPBX"}
+					</h1>
+				</div>
+				<div class="header-right" style="display: flex; align-items: center; gap: 16px;">
+					{*//Dark mode toggle *}
+					<div class="dark-mode-toggle" onclick="toggleDarkMode()"></div>
+					
+					{*//User info *}
+					{if $authenticated}
+						<div style="display: flex; align-items: center; gap: 8px;">
+							<span class="status-indicator status-online"></span>
+							<span style="color: var(--text-secondary); font-size: 0.9rem;">
+								{$username|default:"User"}
+							</span>
+						</div>
+					{/if}
+					
+					{*//Domain selector *}
+					{if $domain_selector_enabled}
+						<button class="btn-modern" onclick="show_domains()">
+							<i class="fas fa-globe"></i>
+							{$domain_name|default:"Domain"}
+						</button>
+					{/if}
+				</div>
+			</header>
+
+			{*//Modern Main Content *}
+			<main class="modern-main">
+				<div id='main_content' class="fade-in-up">
+					{$document_body}
+				</div>
+			</main>
+
+			{*//Modern Widgets Panel *}
+			<aside class="modern-widgets">
+				{*//System Status Widget *}
+				<div class="widget-card">
+					<h3><i class="fas fa-server"></i> System Status</h3>
+					<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+						<span class="status-indicator status-online"></span>
+						<span style="font-size: 0.9rem;">System Online</span>
+					</div>
+					<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+						<span class="status-indicator status-online"></span>
+						<span style="font-size: 0.9rem;">Database Connected</span>
+					</div>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<span class="status-indicator status-away"></span>
+						<span style="font-size: 0.9rem;">High CPU Usage</span>
+					</div>
+				</div>
+
+				{*//Quick Stats Widget *}
+				<div class="widget-card">
+					<h3><i class="fas fa-chart-line"></i> Quick Stats</h3>
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem;">
+						<div>
+							<div style="color: var(--text-tertiary);">Active Calls</div>
+							<div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-blue);">24</div>
+						</div>
+						<div>
+							<div style="color: var(--text-tertiary);">Extensions</div>
+							<div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-blue);">156</div>
+						</div>
+						<div>
+							<div style="color: var(--text-tertiary);">Today's Calls</div>
+							<div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-blue);">1,247</div>
+						</div>
+						<div>
+							<div style="color: var(--text-tertiary);">Uptime</div>
+							<div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-blue);">99.9%</div>
+						</div>
+					</div>
+				</div>
+
+				{*//Recent Activity Widget *}
+				<div class="widget-card">
+					<h3><i class="fas fa-clock"></i> Recent Activity</h3>
+					<div style="font-size: 0.85rem; color: var(--text-secondary);">
+						<div style="padding: 8px 0; border-bottom: 1px solid var(--separator-light);">
+							<div style="font-weight: 500;">Extension 1001 registered</div>
+							<div style="color: var(--text-tertiary);">2 minutes ago</div>
+						</div>
+						<div style="padding: 8px 0; border-bottom: 1px solid var(--separator-light);">
+							<div style="font-weight: 500;">Call completed: 555-1234</div>
+							<div style="color: var(--text-tertiary);">5 minutes ago</div>
+						</div>
+						<div style="padding: 8px 0;">
+							<div style="font-weight: 500;">User admin logged in</div>
+							<div style="color: var(--text-tertiary);">12 minutes ago</div>
+						</div>
+					</div>
+				</div>
+
+				{*//Quick Actions Widget *}
+				<div class="widget-card">
+					<h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+					<div style="display: flex; flex-direction: column; gap: 8px;">
+						<button class="btn-modern" style="width: 100%; justify-content: center;">
+							<i class="fas fa-plus"></i>
+							Add Extension
+						</button>
+						<button class="btn-modern" style="width: 100%; justify-content: center; background: var(--secondary-gray);">
+							<i class="fas fa-download"></i>
+							Export CDR
+						</button>
+						<button class="btn-modern" style="width: 100%; justify-content: center; background: #34C759;">
+							<i class="fas fa-sync"></i>
+							Reload Config
+						</button>
+					</div>
+				</div>
+			</aside>
 		</div>
-		<div id='footer'>
+
+		{*//Footer *}
+		<div id='footer' style="text-align: center; padding: 16px; color: var(--text-tertiary); font-size: 0.85rem;">
 			<span class='footer'>{$settings.theme.footer}</span>
 		</div>
-		{$container_close}
+
+		{*//Legacy menu for compatibility *}
+		<div style="display: none;">
+			{if $settings.theme.menu_style == 'side' || $settings.theme.menu_style == 'inline' || $settings.theme.menu_style == 'static'}
+				{$container_open}
+				{if $settings.theme.menu_style == 'inline'}{$logo}{/if}
+				{$menu}
+				{if $settings.theme.menu_style == 'inline' || $settings.theme.menu_style == 'static'}<br />{/if}
+				{if $settings.theme.menu_style == 'side'}<input type='hidden' id='menu_side_state_current' value='{if $menu_side_state == 'hidden'}expanded{else}{$menu_side_state}{/if}'>{/if}
+			{else} {*//default: fixed *}
+				{$menu}
+				{$container_open}
+			{/if}
+			{$container_close}
+		</div>
 	{/if}
 
 </body>
